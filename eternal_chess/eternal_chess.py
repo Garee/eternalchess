@@ -132,7 +132,12 @@ def play_chess(board):
     moves = list(board.legal_moves)
     move = moves[randint(0, len(moves) - 1)]
     board.push(move)
-    socketio.emit('move', {'fen': board.fen()})
+    socketio.emit('move', {
+        'fen': board.fen(),
+        'n_moves': get_total_moves() + board.fullmove_number,
+        'game_id': str(int(get_n_of_games()) + 1),
+        'n_game_moves': board.fullmove_number
+    })
     interval = app.config['MOVE_INTERVAL_SEC']
     threading.Timer(interval, lambda: play_chess(board)).start()
 
@@ -168,7 +173,8 @@ def get_state():
         'n_white_wins': get_n_white_wins(),
         'n_black_wins': get_n_black_wins(),
         'n_draws': get_n_draws(),
-        'n_moves': get_total_moves()
+        'n_moves': get_total_moves(),
+        'game_id': str(int(get_n_of_games()) + 1)
     }
 
 

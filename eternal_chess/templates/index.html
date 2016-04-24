@@ -19,21 +19,48 @@
     </head>
     <body>
         <div class="container">
-            <h1>Eternal Chess</h1>
-            
-            <div class="row">
+            <nav class="navbar">
+                <div class="container">
+                    <ul class="navbar-list">
+                        <li class="navbar-item f-left">Eternal Chess</li>
+                        <li class="navbar-item"><a class="navbar-link" href="#">About</a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="#">Games</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="row chessboard-section">
                 <div id="chessboard" class="chessboard"></div>
             </div>
 
-            <hr>
-            
-            <div class="row">
-                <p id="n_games">Completed games: {{ n_games }}</p>
-                <p id="n_white_wins">White wins: {{ n_white_wins }}</p>
-                <p id="n_black_wins">Black wins: {{ n_black_wins }}</p>
-                <p id="n_draws">Draws: {{ n_draws }}</p>
-                <p id="n_moves">Moves: {{ n_moves }}</p>
+            <div class="row current-game-section">
+                <h5 class="section-header" id="current-game-header">Game #{{ game_id }} In Progress<h5>
+
+                <ul class="stat-list">
+                    <li id="n_game_moves">Moves: {{ n_game_moves }}</li>
+                </ul>
             </div>
+
+            <div class="row current-game-section">
+                <h5 class="section-header">All Time<h5>
+
+                <ul class="stat-list">
+                    <li id="n_games">Games: {{ n_games }}</li>
+                    <li id="n_white_wins">White wins: {{ n_white_wins }}</li>
+                    <li id="n_black_wins">Black wins: {{ n_black_wins }}</li>
+                    <li id="n_draws">Draws: {{ n_draws }}</li>
+                    <li id="n_moves">Moves: {{ n_moves }}</li>
+                </ul>
+            </div>
+
+            <footer>
+                <div class="container">
+                    <ul class="navbar-list">
+                        <li class="navbar-item"><a class="navbar-link" href="https://twitter.com/gblackwd">@gblackwd</a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="https://github.com/Garee/eternal-chess">Source</a></li>
+                    </ul>
+                </div>
+            </footer>
         </div>
         
         <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
