@@ -1,5 +1,5 @@
 html {
-    border-top: 5px solid black;
+    border-top: 5px solid #B58863;
     min-width: 440px;
 }
 
@@ -38,8 +38,8 @@ body {
     color: #222;
 }
 
-.navbar-link.active {
-    color: #33C3F0;
+.navbar-link:hover {
+    color: #B58863;
 }
 
 .chessboard-section {

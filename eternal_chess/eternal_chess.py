@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import time
 import chess
 import sqlite3
 import eventlet
@@ -9,7 +10,7 @@ from chess.pgn import Game
 from datetime import datetime
 from contextlib import closing
 from flask import Flask, g, render_template
-from flask.ext.socketio import SocketIO
+from flask.ext.socketio import SocketIO, emit
 
 
 # Necessary because we use background threads.
@@ -21,6 +22,8 @@ app = Flask(__name__)
 app.config.from_envvar('ETERNAL_CHESS_CFG')
 
 socketio = SocketIO(app)
+
+board = chess.Board()
 
 
 def init_db():
@@ -123,23 +126,20 @@ def get_total_moves():
         return int(result)
 
 
-def play_chess(board):
+def play_chess():
     """Repeatedly play games of chess and record their results."""
+    global board
     if board.is_game_over():
         record_result(board)
         socketio.emit('game_over', get_state())
+        time.sleep(app.config['SLEEP_INTERVAL_SEC'])
         board.reset()
     moves = list(board.legal_moves)
     move = moves[randint(0, len(moves) - 1)]
     board.push(move)
-    socketio.emit('move', {
-        'fen': board.fen(),
-        'n_moves': get_total_moves() + board.fullmove_number,
-        'game_id': str(int(get_n_of_games()) + 1),
-        'n_game_moves': board.fullmove_number
-    })
+    socketio.emit('move', get_state())
     interval = app.config['MOVE_INTERVAL_SEC']
-    threading.Timer(interval, lambda: play_chess(board)).start()
+    threading.Timer(interval, play_chess).start()
 
 
 def record_result(board):
@@ -169,18 +169,23 @@ def configure_pgn(board):
 def get_state():
     """Return statistics for all chess games."""
     return {
+        'fen': board.fen(),
         'n_games': get_n_of_games(),
         'n_white_wins': get_n_white_wins(),
         'n_black_wins': get_n_black_wins(),
         'n_draws': get_n_draws(),
-        'n_moves': get_total_moves(),
-        'game_id': str(int(get_n_of_games()) + 1)
+        'n_moves': get_total_moves() + board.fullmove_number,
+        'game_id': str(int(get_n_of_games()) + 1),
+        'n_game_moves': board.fullmove_number,
+        'turn': "White" if board.turn else "Black",
+        'game_over': board.is_game_over()
     }
 
 
 @socketio.on('connect')
 def test_connect():
     app.logger.info("Client connected.")
+    emit('connection_established', get_state())
 
 
 @socketio.on('disconnect')
@@ -195,5 +200,5 @@ def index():
 
 
 if __name__ == '__main__':
-    play_chess(chess.Board())
-    socketio.run(app)
+    play_chess()
+    socketio.run(app, use_reloader=False)
