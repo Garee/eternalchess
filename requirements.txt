@@ -1,0 +1,4 @@
+eventlet>=0.18.4
+Flask>=0.10.1
+Flask-SocketIO>=2.2
+python-chess>=0.14.0

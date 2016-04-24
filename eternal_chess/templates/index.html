@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Eternal Chess</title>
+        <meta name="description" content="The chess match that never ends.">
+        <meta name="author" content="Gary Blackwood">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+        
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,300,600">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-0.3.0.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/eternal-chess.css') }}">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Eternal Chess</h1>
+            
+            <div class="row">
+                <div id="chessboard" class="chessboard"></div>
+            </div>
+
+            <hr>
+            
+            <div class="row">
+                <p id="n_games">Completed games: {{ n_games }}</p>
+                <p id="n_white_wins">White wins: {{ n_white_wins }}</p>
+                <p id="n_black_wins">Black wins: {{ n_black_wins }}</p>
+                <p id="n_draws">Draws: {{ n_draws }}</p>
+                <p id="n_moves">Moves: {{ n_moves }}</p>
+            </div>
+        </div>
+        
+        <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+        <script>window.jQuery || document.write("<script src=\"{{ url_for('static', filename='js/jquery-2.2.3.min.js') }}\"><\/script>")</script>
+        <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/chessboard-0.3.0.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/eternal-chess.js') }}"></script>
+    </body>
+</html>
