@@ -1,3 +1,5 @@
+/* Elements */
+
 html {
     border-top: 5px solid #B58863;
     min-width: 440px;
@@ -5,10 +7,24 @@ html {
 
 body {
     color: #222;
+    font-size: 16px;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+  color: #B58863;
+}
+
+pre {
+    overflow: auto;
+}
+
+/* Navigation Bar */
+
 .navbar {
-    height: 6.5rem;
     border-bottom: 1px solid #eee;
 }
 
@@ -18,19 +34,20 @@ body {
 }
 
 .navbar-item {
-    float: right;
-    margin-bottom: 0;
     text-transform: uppercase;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: .2rem;
-    margin-right: 35px;
-    line-height: 6.5rem;
+    line-height: 6.5rem;    
+    margin-left: 35px;
+    margin-bottom: 0;
+    float: right;    
     color: #222;
 }
 
-.f-left {
+.navbar-header {
     float: left;
+    margin-left: 0;
 }
 
 .navbar-link {
@@ -38,9 +55,7 @@ body {
     color: #222;
 }
 
-.navbar-link:hover {
-    color: #B58863;
-}
+/* Chessboard */
 
 .chessboard-section {
     padding: 3rem;
@@ -52,18 +67,16 @@ body {
     margin: 0 auto;
 }
 
-.current-game-section {
-    padding-top: 2rem;
+/* Sections */
+
+.content-section {
+    padding: 3rem;
     border-bottom: 1px solid #eee;
 }
 
-.section-header {
+.heading {
     text-transform: uppercase;
     font-size: 1.4rem;
     letter-spacing: .2rem;
     font-weight: 600;
-}
-
-.stat-list {
-    font-size: 16px;
 }

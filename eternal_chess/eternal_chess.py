@@ -92,6 +92,12 @@ def get_all_chess_games():
     return games
 
 
+def get_nth_chess_game(n):
+    games = get_all_chess_games()
+    games.sort(key=lambda g: g['completion_date'], reverse=True)
+    return games[n - 1]
+
+
 def insert_chess_game(completion_date, is_draw, n_moves, winner, pgn):
     """Add a row to chess_game."""
     query = ('INSERT INTO chess_game'
@@ -217,7 +223,16 @@ def index():
 @app.route('/games')
 def games():
     """Serve the historical games page."""
-    return render_template('games.html', games=get_all_chess_games())
+    games = get_all_chess_games()
+    games.sort(key=lambda g: g['completion_date'], reverse=True)
+    return render_template('games.html', games=games, n_games=len(games))
+
+
+@app.route('/game/<game_id>')
+def game(game_id=None):
+    n = int(game_id)
+    game = get_nth_chess_game(n)
+    return render_template('game.html', game=game, n=game_id)
 
 
 @app.route('/about')

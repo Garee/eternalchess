@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ n }} | Eternal Chess{% endblock %}
+{% block description %}The never ending game of chess.{% endblock %}
+
+{% block content %}
+<div class="row content-section">
+    <h5 class="heading">Game #{{ n }}</h5>
+    <pre><code>{{ game.pgn }}</code></pre>
+</div>
+{% endblock %}

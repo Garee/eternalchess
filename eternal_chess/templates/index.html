@@ -12,26 +12,31 @@
     <div id="chessboard" class="chessboard"></div>
 </div>
 
-<div class="row current-game-section">
-    <h5 class="section-header" id="current-game-header">Game #{{ game_id }}<h5>
+<div class="row content-section">
+    <div class="six columns">
+        <div class="u-pull-right">
+            <h5 class="heading" id="current-game-header">Game #{{ game_id }}</h5>
 
-        <ul class="stat-list">
-            <li id="n_game_moves">Moves: {{ n_game_moves }}</li>
-            <li id="turn">Turn: {{ turn }}</li>
-        </ul>
-</div>
+            <ul>
+                <li id="n_game_moves">Moves: {{ n_game_moves }}</li>
+                <li id="turn">Turn: {{ turn }}</li>
+            </ul>
+        </div>
+    </div>
+   
+    <div class="six columns">
+        <h5 class="heading">All Time</h5>
 
-<div class="row current-game-section">
-    <h5 class="section-header">All Time<h5>
-
-        <ul class="stat-list">
+        <ul>
             <li id="n_games">Games: {{ n_games }}</li>
             <li id="n_white_wins">White wins: {{ n_white_wins }}</li>
             <li id="n_black_wins">Black wins: {{ n_black_wins }}</li>
             <li id="n_draws">Draws: {{ n_draws }}</li>
             <li id="n_moves">Moves: {{ n_moves }}</li>
         </ul>
+    </div>
 </div>
+
 {% endblock %}
 
 {% block js %}        

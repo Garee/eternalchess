@@ -4,13 +4,25 @@
 {% block description %}The never ending game of chess.{% endblock %}
 
 {% block content %}
-<div class="row current-game-section">
-    <h5 class="section-header">Completed Games<h5>
+<div class="row content-section">
+    <h5 class="heading">#{{ n_games }} Completed Games</h5>
 
     <ul>
-        {% for game in games|sort(attribute='completion_date', reverse=True) %}
+        {% for game in games %}
         <li>
-            {{ game.completion_date }} {% if game.is_draw %}Draw{% else %}{{ game.winner }}{% endif %} {{ game.n_moves }}
+            <a href="/game/{{ loop.index }}">
+                {{ game.completion_date.strftime('%H:%M %d/%m/%Y') }} -
+                {{ game.n_moves }} Moves |
+                {% if game.is_draw %}
+                Draw
+                {% else %}
+                {% if game.winner == "white" %}
+                White
+                {% else %}
+                Black
+                {% endif %}
+                {% endif %}
+            </a>
         </li>
         {% endfor %}
     </ul>
