@@ -1,89 +1,43 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Eternal Chess</title>
-        <meta name="description" content="The chess match that never ends.">
-        <meta name="author" content="Gary Blackwood">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'base.html' %}
 
-        <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='img/favicon/apple-icon-57x57.png') }}">
-        <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='img/favicon/apple-icon-60x60.png') }}">
-        <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='img/favicon/apple-icon-72x72.png') }}">
-        <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='img/favicon/apple-icon-76x76.png') }}">
-        <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='img/favicon/apple-icon-114x114.png') }}">
-        <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='img/favicon/apple-icon-120x120.png') }}">
-        <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='img/favicon/apple-icon-144x144.png') }}">
-        <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='img/favicon/apple-icon-152x152.png') }}">
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/favicon/apple-icon-180x180.png') }}">
-        <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='img/favicon/android-icon-192x192.png') }}">
-        <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='img/favicon/favicon-96x96.png') }}">
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon/favicon-32x32.png') }}">        
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicon/favicon-16x16.png') }}">
-        <link rel="manifest" href="{{ url_for('static', filename='img/favicon/manifest.json') }}">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="{{ url_for('static', filename='img/favicon/ms-icon-144x144.png') }}">
-        <meta name="theme-color" content="#ffffff">
-        
-        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,300,600">
+{% block title %}Eternal Chess{% endblock %}
+{% block description %}The never ending game of chess.{% endblock %}
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-0.3.0.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/eternal-chess.css') }}">
-    </head>
-    <body>
-        <div class="container">
-            <nav class="navbar">
-                <div class="container">
-                    <ul class="navbar-list">
-                        <li class="navbar-item f-left"><a class="navbar-link" href="/">Eternal Chess</a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="#">About</a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="#">Games</a></li>
-                    </ul>
-                </div>
-            </nav>
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-0.3.0.min.css') }}">
+{% endblock %}
 
-            <div class="row chessboard-section">
-                <div id="chessboard" class="chessboard"></div>
-            </div>
+{% block content %}
+<div class="row chessboard-section">
+    <div id="chessboard" class="chessboard"></div>
+</div>
 
-            <div class="row current-game-section">
-                <h5 class="section-header" id="current-game-header">Game #{{ game_id }}<h5>
+<div class="row current-game-section">
+    <h5 class="section-header" id="current-game-header">Game #{{ game_id }}<h5>
 
-                <ul class="stat-list">
-                    <li id="n_game_moves">Moves: {{ n_game_moves }}</li>
-                    <li id="turn">Turn: {{ turn }}</li>
-                </ul>
-            </div>
+        <ul class="stat-list">
+            <li id="n_game_moves">Moves: {{ n_game_moves }}</li>
+            <li id="turn">Turn: {{ turn }}</li>
+        </ul>
+</div>
 
-            <div class="row current-game-section">
-                <h5 class="section-header">All Time<h5>
+<div class="row current-game-section">
+    <h5 class="section-header">All Time<h5>
 
-                <ul class="stat-list">
-                    <li id="n_games">Games: {{ n_games }}</li>
-                    <li id="n_white_wins">White wins: {{ n_white_wins }}</li>
-                    <li id="n_black_wins">Black wins: {{ n_black_wins }}</li>
-                    <li id="n_draws">Draws: {{ n_draws }}</li>
-                    <li id="n_moves">Moves: {{ n_moves }}</li>
-                </ul>
-            </div>
+        <ul class="stat-list">
+            <li id="n_games">Games: {{ n_games }}</li>
+            <li id="n_white_wins">White wins: {{ n_white_wins }}</li>
+            <li id="n_black_wins">Black wins: {{ n_black_wins }}</li>
+            <li id="n_draws">Draws: {{ n_draws }}</li>
+            <li id="n_moves">Moves: {{ n_moves }}</li>
+        </ul>
+</div>
+{% endblock %}
 
-            <footer>
-                <div class="container">
-                    <ul class="navbar-list">
-                        <li class="navbar-item"><a class="navbar-link" href="https://twitter.com/gblackwd">@gblackwd</a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="https://github.com/Garee/eternal-chess">Source</a></li>
-                    </ul>
-                </div>
-            </footer>
-        </div>
-        
+{% block js %}        
         <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
         <script>window.jQuery || document.write("<script src=\"{{ url_for('static', filename='js/jquery-2.2.3.min.js') }}\"><\/script>")</script>
         <script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
         <script src="{{ url_for('static', filename='js/chessboard-0.3.0.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/eternal-chess.js') }}"></script>
-    </body>
-</html>
+{% endblock %}

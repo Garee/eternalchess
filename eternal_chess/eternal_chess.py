@@ -16,7 +16,7 @@ from flask.ext.socketio import SocketIO, emit
 # Necessary because we use background threads.
 eventlet.monkey_patch()
 
-DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+DATE_FORMAT = '%H:%M:%S %d-%m-%Y'
 
 app = Flask(__name__)
 app.config.from_envvar('ETERNAL_CHESS_CFG')
@@ -75,6 +75,21 @@ def exec_db(query, args):
     with app.app_context():
         get_db().execute(query, args)
         get_db().commit()
+
+
+def get_all_chess_games():
+    games = []
+    query = 'SELECT * FROM chess_game'
+    for row in query_db(query):
+        completion_date, is_draw, n_moves, winner, pgn = row
+        games.append({
+            'completion_date': datetime.strptime(completion_date, DATE_FORMAT),
+            'is_draw': bool(is_draw),
+            'n_moves': int(n_moves),
+            'winner': winner,
+            'pgn': pgn
+        })
+    return games
 
 
 def insert_chess_game(completion_date, is_draw, n_moves, winner, pgn):
@@ -197,6 +212,18 @@ def test_disconnect():
 def index():
     """Serve the root page."""
     return render_template('index.html', **get_state())
+
+
+@app.route('/games')
+def games():
+    """Serve the historical games page."""
+    return render_template('games.html', games=get_all_chess_games())
+
+
+@app.route('/about')
+def about():
+    """Serve the about page."""
+    return render_template('about.html')
 
 
 if __name__ == '__main__':

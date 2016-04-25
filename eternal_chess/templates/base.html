@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="description" content="{% block description %}{% endblock %}">
+        <meta name="author" content="Gary Blackwood">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% include 'favicon.html' %}
+        
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,300,600">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/eternal-chess.css') }}">
+
+        {% block css %}{% endblock %}
+    </head>
+    <body>
+        <div class="container">
+            {% include 'navbar.html' %}
+            
+            {% block content %}{% endblock %}
+
+            {% include 'footer.html' %}
+        </div>
+        
+        {% block js %}{% endblock %}
+    </body>
+</html>

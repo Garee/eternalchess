@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Games | Eternal Chess{% endblock %}
+{% block description %}The never ending game of chess.{% endblock %}
+
+{% block content %}
+<div class="row current-game-section">
+    <h5 class="section-header">Completed Games<h5>
+
+    <ul>
+        {% for game in games|sort(attribute='completion_date', reverse=True) %}
+        <li>
+            {{ game.completion_date }} {% if game.is_draw %}Draw{% else %}{{ game.winner }}{% endif %} {{ game.n_moves }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
