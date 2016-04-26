@@ -2,7 +2,6 @@
 
 html {
     border-top: 5px solid #B58863;
-    min-width: 440px;
 }
 
 body {
@@ -18,8 +17,8 @@ a:hover {
   color: #B58863;
 }
 
-pre {
-    overflow: auto;
+code {
+    overflow: scroll;
 }
 
 /* Navigation Bar */
@@ -72,6 +71,7 @@ pre {
 .content-section {
     padding: 3rem;
     border-bottom: 1px solid #eee;
+    font-size: 14px;
 }
 
 .heading {

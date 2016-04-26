@@ -16,7 +16,7 @@ from flask.ext.socketio import SocketIO, emit
 # Necessary because we use background threads.
 eventlet.monkey_patch()
 
-DATE_FORMAT = '%H:%M:%S %d-%m-%Y'
+DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 app = Flask(__name__)
 app.config.from_envvar('ETERNAL_CHESS_CFG')
@@ -79,7 +79,7 @@ def exec_db(query, args):
 
 def get_all_chess_games():
     games = []
-    query = 'SELECT * FROM chess_game'
+    query = 'SELECT * FROM chess_game ORDER BY DATETIME(completion_date) DESC'
     for row in query_db(query):
         completion_date, is_draw, n_moves, winner, pgn = row
         games.append({
@@ -90,12 +90,6 @@ def get_all_chess_games():
             'pgn': pgn
         })
     return games
-
-
-def get_nth_chess_game(n):
-    games = get_all_chess_games()
-    games.sort(key=lambda g: g['completion_date'], reverse=True)
-    return games[n - 1]
 
 
 def insert_chess_game(completion_date, is_draw, n_moves, winner, pgn):
@@ -224,15 +218,16 @@ def index():
 def games():
     """Serve the historical games page."""
     games = get_all_chess_games()
-    games.sort(key=lambda g: g['completion_date'], reverse=True)
     return render_template('games.html', games=games, n_games=len(games))
 
 
 @app.route('/game/<game_id>')
 def game(game_id=None):
     n = int(game_id)
-    game = get_nth_chess_game(n)
-    return render_template('game.html', game=game, n=game_id)
+    games = get_all_chess_games()
+    game = games[n]
+    n = len(games) - n
+    return render_template('game.html', game=game, n=n)
 
 
 @app.route('/about')

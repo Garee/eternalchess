@@ -10,7 +10,7 @@
     <ul>
         {% for game in games %}
         <li>
-            <a href="/game/{{ loop.index }}">
+            <a href="/game/{{ loop.index0 }}">
                 {{ game.completion_date.strftime('%H:%M %d/%m/%Y') }} -
                 {{ game.n_moves }} Moves |
                 {% if game.is_draw %}
