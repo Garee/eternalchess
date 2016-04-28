@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var board = ChessBoard('chessboard', {
-        pieceTheme: 'static/img/chesspieces/wikipedia/{piece}.png'
+        pieceTheme: '/static/img/chesspieces/wikipedia/{piece}.png'
     });
 
     $(window).resize(board.resize);

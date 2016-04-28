@@ -80,3 +80,13 @@ code {
     letter-spacing: .2rem;
     font-weight: 600;
 }
+
+.move-buttons {
+    padding: 2rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+button[disabled] {
+    opacity: 0.5;
+}

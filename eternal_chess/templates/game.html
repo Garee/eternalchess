@@ -1,11 +1,36 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ n }} | Eternal Chess{% endblock %}
+{% block title %}Game #{{ n }} | Eternal Chess{% endblock %}
 {% block description %}The never ending game of chess.{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chessboard-0.3.0.min.css') }}">
+{% endblock %}
+
 {% block content %}
+<div class="row chessboard-section">
+    <div id="chessboard" class="chessboard"></div>
+
+    <div class="twelve columns">
+        <div class="six columns offset-by-three move-buttons">
+            <button id="start-btn" disabled>start</button>
+            <button id="prev-btn" disabled>prev</button>
+            <button id="next-btn">next</button>
+            <button id="end-btn">end</button>
+        </div>
+    </div>
+</div>
+
 <div class="row content-section">
     <h5 class="heading">Game #{{ n }}</h5>
-    <pre><code>{{ game.pgn }}</code></pre>
+    <pre><code id="pgn">{{ game.pgn }}</code></pre>
 </div>
+{% endblock %}
+
+{% block js %}        
+<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+<script>window.jQuery || document.write("<script src=\"{{ url_for('static', filename='js/jquery-2.2.3.min.js') }}\"><\/script>")</script>
+<script src="{{ url_for('static', filename='js/chess.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chessboard-0.3.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/eternal-chess-game.js') }}"></script>
 {% endblock %}
