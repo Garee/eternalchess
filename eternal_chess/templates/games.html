@@ -5,26 +5,35 @@
 
 {% block content %}
 <div class="row content-section">
-    <h5 class="heading">#{{ n_games }} Completed Games</h5>
-
-    <ul>
-        {% for game in games %}
-        <li>
-            <a href="/game/{{ loop.index0 }}">
-                {{ game.completion_date.strftime('%H:%M %d/%m/%Y') }} -
-                {{ game.n_moves }} Moves |
-                {% if game.is_draw %}
-                Draw
-                {% else %}
-                {% if game.winner == "white" %}
-                White
-                {% else %}
-                Black
-                {% endif %}
-                {% endif %}
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+    <table class="u-full-width">
+        <thead>
+            <tr>
+                <th>Game</th>
+                <th>Date</th>
+                <th>Result</th>
+                <th>Moves</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games %}
+            <tr>
+                <td><a href="/game/{{ n_games - loop.index0 }}">{{ n_games - loop.index0 }}</a></td>
+                <td>{{ game.completion_date.strftime('%H:%M %d/%m/%Y') }}</td>
+                <td>
+                    {% if game.is_draw %}
+                        Draw
+                    {% else %}
+                        {% if game.winner == "white" %}
+                            White
+                        {% else %}
+                            Black
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td>{{ game.n_moves }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

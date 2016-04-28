@@ -223,11 +223,10 @@ def games():
 
 @app.route('/game/<game_id>')
 def game(game_id=None):
-    n = int(game_id)
     games = get_all_chess_games()
+    n = len(games) - int(game_id)
     game = games[n]
-    n = len(games) - n
-    return render_template('game.html', game=game, n=n)
+    return render_template('game.html', game=game, n=game_id)
 
 
 @app.route('/about')
