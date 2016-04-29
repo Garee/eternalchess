@@ -61,7 +61,7 @@ function handleMoves(moves, board) {
         var pgn = $('#pgn').text();
         game.load_pgn(pgn);
         board.position(game.fen());
-        move_idx = moves.length - 1;
+        move_idx = moves.length;
 
         $('#start-btn').attr('disabled', false);
         $('#prev-btn').attr('disabled', false);
