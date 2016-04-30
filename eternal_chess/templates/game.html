@@ -8,6 +8,11 @@
 {% endblock %}
 
 {% block content %}
+<div class="row content-section">
+    <h5 class="heading">Game #{{ n }}</h5>
+    <pre><code id="pgn">{{ game.pgn }}</code></pre>
+</div>
+
 <div class="row chessboard-section">
     <div id="chessboard" class="chessboard"></div>
 
@@ -21,10 +26,12 @@
     </div>
 </div>
 
+{% if not config['DEBUG'] %}
 <div class="row content-section">
-    <h5 class="heading">Game #{{ n }}</h5>
-    <pre><code id="pgn">{{ game.pgn }}</code></pre>
+    {% include 'disqus.html' %}
 </div>
+{% endif %}
+
 {% endblock %}
 
 {% block js %}        
