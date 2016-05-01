@@ -27,7 +27,8 @@ function handleSocketMessages(board) {
     });
     
     socket.on('game_over', function(msg) {
-        $('#current-game-header').text("Game #" + msg.game_id + " Complete");
+        var prev_game_id = parseInt(msg.game_id, 10) - 1;
+        $('#current-game-header').text("Game #" + prev_game_id + " Complete");
         update(board, msg);
     });
 }

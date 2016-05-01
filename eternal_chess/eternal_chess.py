@@ -162,6 +162,9 @@ def record_result(board):
     completion_date = datetime.now().strftime(DATE_FORMAT)
     is_draw = 1 if board.result() == '1/2-1/2' else 0
     n_moves = board.fullmove_number
+    if board.turn:  # White's turn.
+        # board.fullmove_number is incremented after every black turn.
+        n_moves -= 1
     winner = 'white' if board.result() == '1-0' else 'black'
     if is_draw:
         winner = None
