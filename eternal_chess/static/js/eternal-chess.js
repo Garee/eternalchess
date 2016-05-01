@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 
 function handleSocketMessages(board) {
-    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    var socket = io.connect('//' + document.domain + ':' + location.port);
 
     socket.on('connection_established', function(msg) {
         if (msg.game_over) {
