@@ -1,3 +1,5 @@
-# eternalchess.com
+<h1 align="center">eternalchess.com</h1>
 
-A never-ending chess match between random numbers.
+![www.eternalchess.com](https://imgur.com/kSiEIXx.png)
+
+[eternalchess.com](www.eternalchess.com) is a website that displays a never-ending chess match betwee two AI opponents.
