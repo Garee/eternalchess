@@ -2,4 +2,4 @@
 
 ![www.eternalchess.com](https://imgur.com/kSiEIXx.png)
 
-[eternalchess.com](www.eternalchess.com) is a website that displays a never-ending chess match betwee two AI opponents.
+[eternalchess.com](https://www.eternalchess.com) is a website that displays a never-ending chess match betwee two AI opponents.
